@@ -1,0 +1,59 @@
+Problem 
+
+You are given an integer array nums of length n.
+
+Assume arrk to be an array obtained by rotating nums by k positions clock-wise. We define the rotation function F on nums as follow:
+
+F(k) = 0 * arrk[0] + 1 * arrk[1] + ... + (n - 1) * arrk[n - 1].
+Return the maximum value of F(0), F(1), ..., F(n-1).
+
+The test cases are generated so that the answer fits in a 32-bit integer.
+
+Solution
+
+class Solution {
+    public int maxRotateFunction(int[] nums) {
+        int n = nums.length;
+        
+        int sum = 0;
+        int f = 0;
+        
+        // Step 1: Calculate sum and F(0)
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+            f += i * nums[i];
+        }
+        
+        int max = f;
+        
+        // Step 2: Use relation to compute F(k)
+        for (int k = 1; k < n; k++) {
+            f = f + sum - n * nums[n - k];
+            max = Math.max(max, f);
+        }
+        
+        return max;
+
+
+ Explanation 
+            1 Find Value of F(0) value first
+            
+            2 why ? f = f + sum - n * nums[n - k];
+            or 
+            New F = Old F + (all gained) - (what lost)
+            # after one rotation we are  finding f(k) value with simple formula lets understand logic simpally
+     ##nums[n-k] == the element that moves from last → front
+            Example : [4,3,2,6]
+            -- [6,4,3,2]
+            # n*nums[n-k]== 6 jumps to front → loses weight → subtract 4 × 6
+            
+
+
+
+
+
+
+            
+    }
+}
+ 
