@@ -1,0 +1,33 @@
+#Problem 
+You are given an integer n.
+
+Form a new integer x by concatenating all the non-zero digits of n in their original order. If there are no non-zero digits, x = 0.
+
+Let sum be the sum of digits in x.
+
+Return an integer representing the value of x * sum.
+
+#Solution
+
+class Solution {
+    public long sumAndMultiply(int n) {
+        String s = String.valueOf(n);
+
+        StringBuilder x = new StringBuilder();
+        int sum = 0;
+
+        for (char ch : s.toCharArray()) {
+            if (ch != '0') {
+                x.append(ch);
+                sum += ch - '0';
+            }
+        }
+
+        if (x.length() == 0) {
+            return 0;
+        }
+
+        long num = Long.parseLong(x.toString());
+        return num * sum;
+    }
+}
